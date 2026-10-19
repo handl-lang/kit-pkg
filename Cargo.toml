@@ -81,9 +81,6 @@ handl-kit-data-prelude = { path = "../kit-data-prelude/crates/handl-kit-data-pre
 handl-language = { path = "../kernel/crates/handl-language" }
 handl-value = { path = "../kernel/crates/handl-value" }
 
-[patch."https://github.com/handl-lang/kit-data-prelude"]
-handl-kit-data-prelude = { path = "../kit-data-prelude/crates/handl-kit-data-prelude" }
-
 [patch."https://github.com/handl-lang/native"]
 
 # Match platform's dev profile: unoptimized (opt-level=0) builds overflow the
