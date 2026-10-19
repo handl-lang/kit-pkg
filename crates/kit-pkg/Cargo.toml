@@ -1,0 +1,13 @@
+[package]
+name = "handl-kit-pkg"
+version = "0.1.0"
+edition = "2024"
+description = "Package kit — .handl.toml project discovery and dependency wiring for the prelude Kit."
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+handl-kit-prelude = { git = "https://github.com/handl-lang/kit-prelude", branch = "main" }
+handl-kit-data-prelude = { git = "https://github.com/handl-lang/kit-data-prelude", branch = "main" }
+handl-language = { git = "https://github.com/handl-lang/kernel", branch = "main" }
+handl-platform = { git = "https://github.com/handl-lang/host", branch = "main" }
