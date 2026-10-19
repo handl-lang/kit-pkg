@@ -1,0 +1,11 @@
+# handl language manifest for the kit-pkg workspace.
+#
+# ADR-0128 Phase-5 seam: the native impl packages live in their own repos, so
+# a `.hnl` file that imports them by *name* (`from "rand-c" import …`) resolves
+# through this table instead of a `../` path. This is the dev-root manifest for
+# the tests that load those packages from the sibling checkouts.
+[dependencies]
+rand-c = { path = "../lib-rand-c/src" }
+time-c = { path = "../lib-time-c/src" }
+uuid-c = { path = "../lib-uuid-c/src" }
+uuid-stub = { path = "../lib-uuid-stub" }
