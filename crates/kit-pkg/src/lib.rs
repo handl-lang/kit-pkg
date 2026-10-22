@@ -84,7 +84,7 @@ impl KitProjectExt for Kit {
     fn new_with_module_root(module_root: PathBuf) -> Result<Self, LangError> {
         let kit = handl_kit_data_prelude::assemble()?;
         let lang = kit.lang().clone();
-        let config = kit.runtime_config().clone().with_typecheck("handl");
+        let config = kit.runtime_config().clone().with_typecheck("nbe");
         Self::build_kit(
             lang,
             config,
@@ -98,7 +98,7 @@ impl KitProjectExt for Kit {
     fn new_with_project(project_root: PathBuf) -> Result<Self, LangError> {
         let kit = handl_kit_data_prelude::assemble()?;
         let lang = kit.lang().clone();
-        let config = kit.runtime_config().clone().with_typecheck("handl");
+        let config = kit.runtime_config().clone().with_typecheck("nbe");
         let deps = load_project_dependencies(&project_root)?;
         Self::build_kit(
             lang,
@@ -148,7 +148,7 @@ impl DiscoverInner for Kit {
         // re-exported for caller assembly (ADR-0103 follow-up).
         let data_kit = handl_kit_data_prelude::assemble()?;
         let lang = data_kit.lang().clone();
-        let mut config = data_kit.runtime_config().clone().with_typecheck("handl");
+        let mut config = data_kit.runtime_config().clone().with_typecheck("nbe");
         if let Some(name) = eval_name {
             config = config.with_eval(name);
         }
