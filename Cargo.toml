@@ -21,11 +21,6 @@ repository = "https://github.com/handl-lang/kit-pkg"
 #   GIT_CONFIG_VALUE_1="https://github.com/handl-lang/kit-data-prelude" \
 #   cargo check --workspace
 
-
-
-
-
-
 [profile.dev]
 opt-level = 1
 
@@ -135,7 +130,6 @@ handl-plugin-lib-handl = { path = "../host/crates/plugin-lib-handl" }
 handl-plugin-lib-tag = { path = "../host/crates/plugin-lib-tag" }
 handl-plugin-module = { path = "../host/crates/plugin-module" }
 handl-runtime = { path = "../host/crates/handl-runtime" }
-handl-test-utils = { path = "../host/crates/handl-test-utils" }
 
 [patch."https://github.com/handl-lang/platform"]
 handl-plugin-lib-char-native = { path = "../lib-char-native" }
@@ -155,7 +149,6 @@ handl-plugin-lib-handl = { path = "../host/crates/plugin-lib-handl" }
 handl-plugin-lib-tag = { path = "../host/crates/plugin-lib-tag" }
 handl-plugin-module = { path = "../host/crates/plugin-module" }
 handl-runtime = { path = "../host/crates/handl-runtime" }
-handl-test-utils = { path = "../host/crates/handl-test-utils" }
 
 [patch."https://github.com/handl-lang/lib-intl-c"]
 handl-lib-intl-c = { path = "../lib-intl-c" }
@@ -228,9 +221,6 @@ handl-plugin-lib-crypto = { path = "../lib-crypto" }
 
 [patch."https://github.com/handl-lang/lib-datetime"]
 handl-lib-datetime = { path = "../lib-datetime" }
-
-[patch."https://github.com/handl-lang/lib-dedent"]
-handl-lib-dedent = { path = "../lib-dedent" }
 
 [patch."https://github.com/handl-lang/lib-desugar"]
 handl-lib-desugar = { path = "../lib-desugar" }
