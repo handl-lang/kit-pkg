@@ -5,6 +5,9 @@ edition = "2024"
 description = "Package kit — .handl.toml project discovery and dependency wiring for the prelude Kit."
 license.workspace = true
 repository.workspace = true
+readme = "../../README.md"
+keywords = ["handl", "kit", "packages"]
+categories = ["development-tools"]
 
 [dependencies]
 handl-kit-prelude = { git = "https://github.com/handl-lang/kit-prelude", branch = "main" }
