@@ -1,0 +1,15 @@
+/home/luis/GitHub/handl-lang/kit-pkg/target/debug/deps/region-17ec36669cf7d0bf.d: /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/lib.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/alloc.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/error.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/lock.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/mod.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/unix.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/linux.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/page.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/protect.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/query.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/util.rs
+
+/home/luis/GitHub/handl-lang/kit-pkg/target/debug/deps/libregion-17ec36669cf7d0bf.rmeta: /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/lib.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/alloc.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/error.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/lock.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/mod.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/unix.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/linux.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/page.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/protect.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/query.rs /home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/util.rs
+
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/lib.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/alloc.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/error.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/lock.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/mod.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/unix.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/os/linux.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/page.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/protect.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/query.rs:
+/home/luis/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/region-3.0.2/src/util.rs:

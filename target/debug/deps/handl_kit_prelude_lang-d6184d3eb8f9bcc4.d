@@ -1,0 +1,17 @@
+/home/luis/GitHub/handl-lang/kit-pkg/target/debug/deps/handl_kit_prelude_lang-d6184d3eb8f9bcc4.d: /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/lib.rs /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/tokens.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/grammar.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/eval.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/types.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/ast.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/caps.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/options.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/lexer_rules.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/transforms.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/globals.yaml
+
+/home/luis/GitHub/handl-lang/kit-pkg/target/debug/deps/libhandl_kit_prelude_lang-d6184d3eb8f9bcc4.rmeta: /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/lib.rs /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/tokens.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/grammar.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/eval.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/types.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/ast.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/caps.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/options.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/lexer_rules.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/transforms.yaml /home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/globals.yaml
+
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/lib.rs:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/tokens.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/grammar.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/eval.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/types.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/ast.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/caps.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/options.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/lexer_rules.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/transforms.yaml:
+/home/luis/GitHub/handl-lang/kit-prelude-lang/crates/handl-kit-prelude-lang/src/../data/globals.yaml:
+
+# env-dep:CARGO_PKG_VERSION=0.1.0
