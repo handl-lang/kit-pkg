@@ -307,6 +307,95 @@ fn import_dependency_fallback_to_module_root() {
 }
 
 // ---------------------------------------------------------------------------
+// `kit.hnl` kits — `Kit::discover_with_kit` (`hnl run --kit <dir>`)
+// ---------------------------------------------------------------------------
+
+/// `discover_with_kit` merges a kit's `libs` — sibling `lib-<name>`
+/// checkouts plus their transitive `pkg.hnl` `deps` — into the project
+/// dependency map, so `import "<lib>/<file>"` resolves without any
+/// `.handl.toml` entry.
+///
+/// Fixture layout:
+///
+/// ```text
+/// <root>/proj/main.hnl            do { import "foo/answer.hnl"; ... }
+/// <root>/kit-demo/kit.hnl         { libs: ["foo"] }
+/// <root>/lib-foo/answer.hnl       answer :: 40
+/// <root>/lib-foo/pkg.hnl          deps: { bar }   (transitive)
+/// <root>/lib-bar/two.hnl          two :: 2
+/// ```
+#[test]
+fn discover_with_kit_merges_libs_and_transitive_deps() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    let proj = root.join("proj");
+    let kit_dir = root.join("kit-demo");
+    let lib_foo = root.join("lib-foo");
+    let lib_bar = root.join("lib-bar");
+    for d in [&proj, &kit_dir, &lib_foo, &lib_bar] {
+        fs::create_dir_all(d).expect("create dir");
+    }
+
+    fs::write(
+        kit_dir.join("kit.hnl"),
+        "{ name: \"kit-demo\", license: \"MIT\", libs: [\"foo\"] }\n",
+    )
+    .expect("write kit.hnl");
+    // `foo`'s own pkg.hnl pulls contract `bar` transitively.
+    fs::write(
+        lib_foo.join("pkg.hnl"),
+        "{ modules: [\"foo\"], deps: { bar: \"branch:main\" } }\n",
+    )
+    .expect("write pkg.hnl");
+    write_module(&lib_foo, "answer.hnl", "answer :: 40");
+    write_module(&lib_bar, "two.hnl", "two :: 2");
+    let main = write_module(
+        &proj,
+        "main.hnl",
+        "do { import \"foo/answer.hnl\"; import \"bar/two.hnl\"; answer + two }",
+    );
+
+    let kit = Kit::discover_with_kit(&main, &kit_dir).expect("kit");
+    let src = fs::read_to_string(&main).expect("read main.hnl");
+    let val = kit.eval(&src).expect("eval should succeed");
+    assert_eq!(val, json!(42));
+}
+
+/// A project `[dependencies]` entry wins over a same-named kit `libs`
+/// entry: the kit map fills only names the manifest does not declare.
+#[test]
+fn discover_with_kit_project_deps_win_on_collision() {
+    let dir = tempfile::tempdir().expect("tempdir");
+    let root = dir.path();
+    let proj = root.join("proj");
+    let kit_dir = root.join("kit-demo");
+    let lib_foo = root.join("lib-foo");
+    let vendored = proj.join("vendor/foo");
+    for d in [&proj, &kit_dir, &lib_foo, &vendored] {
+        fs::create_dir_all(d).expect("create dir");
+    }
+
+    fs::write(kit_dir.join("kit.hnl"), "{ libs: [\"foo\"] }\n").expect("write kit.hnl");
+    write_module(&lib_foo, "answer.hnl", "answer :: 0");
+    fs::write(
+        proj.join(".handl.toml"),
+        "[dependencies]\nfoo = \"vendor/foo\"\n",
+    )
+    .expect("write manifest");
+    write_module(&vendored, "answer.hnl", "answer :: 42");
+    let main = write_module(
+        &proj,
+        "main.hnl",
+        "do { import \"foo/answer.hnl\"; answer }",
+    );
+
+    let kit = Kit::discover_with_kit(&main, &kit_dir).expect("kit");
+    let src = fs::read_to_string(&main).expect("read main.hnl");
+    let val = kit.eval(&src).expect("eval should succeed");
+    assert_eq!(val, json!(42));
+}
+
+// ---------------------------------------------------------------------------
 // `from "path" import ...` — the full canonical import surface (ADR-0096)
 // ---------------------------------------------------------------------------
 

@@ -78,6 +78,37 @@ pub trait KitProjectExt: Sized {
     /// See [`KitProjectExt::discover`]; additionally returns
     /// [`LangError::Engine`] for an unknown engine name.
     fn discover_with_eval(start: &Path, eval_name: &str) -> Result<Self, LangError>;
+
+    /// Like [`KitProjectExt::discover`] but additionally merges the
+    /// dependency map of a `kit.hnl` kit directory —
+    /// [`handl_platform::resolve_kit_dependencies`]: the kit's `libs`
+    /// entries (sibling `lib-<name>` checkouts) plus their transitive
+    /// `pkg.hnl` `deps`. Kit-resolved names fill only slots the project
+    /// manifest does not already declare — an explicit `[dependencies]`
+    /// entry wins over a curated kit lib.
+    ///
+    /// `kit_dir` may be the kit repo's root (the directory containing
+    /// `kit.hnl`) or the `kit.hnl` file itself; a missing manifest yields
+    /// no extra deps, matching the `pkg.hnl` leniency rule.
+    ///
+    /// # Errors
+    ///
+    /// See [`KitProjectExt::discover`].
+    fn discover_with_kit(start: &Path, kit_dir: &Path) -> Result<Self, LangError>;
+
+    /// Like [`KitProjectExt::discover_with_eval`] plus
+    /// [`KitProjectExt::discover_with_kit`]: a specific eval engine and a
+    /// `kit.hnl` kit directory merged into the project deps.
+    ///
+    /// # Errors
+    ///
+    /// See [`KitProjectExt::discover_with_eval`] and
+    /// [`KitProjectExt::discover_with_kit`].
+    fn discover_with_kit_and_eval(
+        start: &Path,
+        eval_name: &str,
+        kit_dir: &Path,
+    ) -> Result<Self, LangError>;
 }
 
 impl KitProjectExt for Kit {
@@ -111,22 +142,42 @@ impl KitProjectExt for Kit {
     }
 
     fn discover(start: &Path) -> Result<Self, LangError> {
-        Self::discover_inner(start, None)
+        Self::discover_inner(start, None, None)
     }
 
     fn discover_with_eval(start: &Path, eval_name: &str) -> Result<Self, LangError> {
-        Self::discover_inner(start, Some(eval_name))
+        Self::discover_inner(start, Some(eval_name), None)
+    }
+
+    fn discover_with_kit(start: &Path, kit_dir: &Path) -> Result<Self, LangError> {
+        Self::discover_inner(start, None, Some(kit_dir))
+    }
+
+    fn discover_with_kit_and_eval(
+        start: &Path,
+        eval_name: &str,
+        kit_dir: &Path,
+    ) -> Result<Self, LangError> {
+        Self::discover_inner(start, Some(eval_name), Some(kit_dir))
     }
 }
 
 trait DiscoverInner {
-    fn discover_inner(start: &Path, eval_name: Option<&str>) -> Result<Self, LangError>
+    fn discover_inner(
+        start: &Path,
+        eval_name: Option<&str>,
+        kit_dir: Option<&Path>,
+    ) -> Result<Self, LangError>
     where
         Self: Sized;
 }
 
 impl DiscoverInner for Kit {
-    fn discover_inner(start: &Path, eval_name: Option<&str>) -> Result<Self, LangError> {
+    fn discover_inner(
+        start: &Path,
+        eval_name: Option<&str>,
+        kit_dir: Option<&Path>,
+    ) -> Result<Self, LangError> {
         // Normalize `start` to a directory: a file path contributes its
         // parent directory.
         let start_dir = if start.is_file() {
@@ -153,9 +204,19 @@ impl DiscoverInner for Kit {
             config = config.with_eval(name);
         }
 
-        let deps = manifest_dir
+        let mut deps = manifest_dir
             .map(|root| load_project_dependencies(&root))
             .unwrap_or_else(|| Ok(HashMap::new()))?;
+        // A `kit.hnl` kit (`--kit` on `hnl run`/`hnl eval`) contributes its
+        // `libs` + transitive `pkg.hnl` deps as *fill-missing* entries:
+        // names the project manifest already declares keep their source.
+        if let Some(kit_dir) = kit_dir {
+            for (name, dir) in handl_platform::resolve_kit_dependencies(kit_dir)
+                .map_err(|e| LangError::engine(format!("kit dependencies: {e}")))?
+            {
+                deps.entry(name).or_insert(dir);
+            }
+        }
         Kit::build_kit(
             lang,
             config,
