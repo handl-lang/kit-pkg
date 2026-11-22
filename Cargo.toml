@@ -177,8 +177,6 @@ handl-lib-comb = { path = "../lib-comb" }
 [patch."https://github.com/handl-lang/lib-char-native"]
 handl-plugin-lib-char-native = { path = "../lib-char-native" }
 
-[patch."https://github.com/handl-lang/lib-collections"]
-handl-lib-collections = { path = "../lib-collections" }
 
 [patch."https://github.com/handl-lang/lib-kv"]
 handl-plugin-lib-kv = { path = "../lib-kv" }
