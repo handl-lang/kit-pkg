@@ -178,12 +178,6 @@ handl-lib-perlin = { path = "../lib-perlin" }
 [patch."https://github.com/handl-lang/lib-simplex"]
 handl-lib-simplex = { path = "../lib-simplex" }
 
-[patch."https://github.com/handl-lang/lib-test"]
-handl-lib-test = { path = "../lib-test" }
-
-
-[patch."https://github.com/handl-lang/lib-ffi"]
-handl-lib-ffi = { path = "../lib-ffi" }
 
 [patch."https://github.com/handl-lang/lib-comb"]
 handl-lib-comb = { path = "../lib-comb" }
