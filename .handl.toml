@@ -6,6 +6,5 @@
 # the tests that load those packages from the sibling checkouts.
 [dependencies]
 rand-c = { path = "../lib-rand-c/src" }
-time-c = { path = "../lib-time-c/src" }
 uuid-c = { path = "../lib-uuid-c/src" }
 uuid-stub = { path = "../lib-uuid-stub" }
