@@ -498,15 +498,15 @@ dependencies = [
  "handl-plugin-lib-tag",
  "handl-plugin-module",
  "handl-runtime",
- "hnl-engine-exec",
- "hnl-engine-exec-bytecode",
- "hnl-engine-exec-cranelift",
- "hnl-engine-exec-tree-walk",
- "hnl-engine-lex-pattern",
- "hnl-engine-parse",
- "hnl-engine-parse-pratt",
- "hnl-engine-typecheck",
- "hnl-engine-typecheck-nbe",
+ "hnl-exec",
+ "hnl-exec-bytecode",
+ "hnl-exec-cranelift",
+ "hnl-exec-tree-walk",
+ "hnl-tool-lex-pattern",
+ "hnl-tool-parse",
+ "hnl-tool-parse-pratt",
+ "hnl-tool-typecheck",
+ "hnl-tool-typecheck-nbe",
  "libc",
  "serde",
  "serde_json",
@@ -518,7 +518,7 @@ version = "0.1.0"
 dependencies = [
  "handl-language",
  "handl-plugin-ext-diag",
- "hnl-engine-transform",
+ "hnl-tool-transform",
  "serde_json",
  "serde_yaml",
 ]
@@ -738,10 +738,10 @@ dependencies = [
  "handl-language",
  "handl-platform",
  "handl-plugin-ext-diag",
- "hnl-engine-fmt",
- "hnl-engine-lex-pattern",
- "hnl-engine-parse",
- "hnl-engine-parse-pratt",
+ "hnl-tool-fmt",
+ "hnl-tool-lex-pattern",
+ "hnl-tool-parse",
+ "hnl-tool-parse-pratt",
  "serde_json",
 ]
 
@@ -754,10 +754,10 @@ dependencies = [
  "handl-plugin-ext-diag",
  "handl-plugin-ext-fmt",
  "handl-plugin-lib-handl",
- "hnl-engine-lex-pattern",
- "hnl-engine-lint",
- "hnl-engine-parse-pratt",
- "hnl-engine-typecheck",
+ "hnl-tool-lex-pattern",
+ "hnl-tool-lint",
+ "hnl-tool-parse-pratt",
+ "hnl-tool-typecheck",
  "serde_json",
 ]
 
@@ -796,12 +796,12 @@ dependencies = [
  "handl-runtime",
  "handl-value",
  "hnl-engine",
- "hnl-engine-exec",
- "hnl-engine-exec-bytecode",
- "hnl-engine-exec-tree-walk",
- "hnl-engine-lex-pattern",
- "hnl-engine-parse-pratt",
- "hnl-engine-transform",
+ "hnl-exec",
+ "hnl-exec-bytecode",
+ "hnl-exec-tree-walk",
+ "hnl-tool-lex-pattern",
+ "hnl-tool-parse-pratt",
+ "hnl-tool-transform",
  "serde_json",
 ]
 
@@ -1002,11 +1002,11 @@ dependencies = [
  "handl-platform",
  "handl-value",
  "hnl-engine",
- "hnl-engine-exec",
- "hnl-engine-lex",
- "hnl-engine-parse",
- "hnl-engine-transform-rewrite",
- "hnl-engine-typecheck",
+ "hnl-exec",
+ "hnl-tool-lex",
+ "hnl-tool-parse",
+ "hnl-tool-transform-rewrite",
+ "hnl-tool-typecheck",
  "rustc-hash",
  "serde",
  "serde_json",
@@ -1059,7 +1059,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hnl-engine-exec"
+name = "hnl-exec"
 version = "0.1.0"
 dependencies = [
  "handl-language",
@@ -1071,7 +1071,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hnl-engine-exec-bytecode"
+name = "hnl-exec-bytecode"
 version = "0.1.0"
 dependencies = [
  "handl-language",
@@ -1079,14 +1079,14 @@ dependencies = [
  "handl-runtime",
  "handl-value",
  "hnl-engine",
- "hnl-engine-exec",
+ "hnl-exec",
  "rustc-hash",
  "serde_json",
  "stacker",
 ]
 
 [[package]]
-name = "hnl-engine-exec-cranelift"
+name = "hnl-exec-cranelift"
 version = "0.1.0"
 dependencies = [
  "cranelift",
@@ -1099,38 +1099,38 @@ dependencies = [
  "handl-runtime",
  "handl-value",
  "hnl-engine",
- "hnl-engine-exec",
- "hnl-engine-exec-tree-walk",
+ "hnl-exec",
+ "hnl-exec-tree-walk",
  "rustc-hash",
  "serde_json",
  "stacker",
 ]
 
 [[package]]
-name = "hnl-engine-exec-tree-walk"
+name = "hnl-exec-tree-walk"
 version = "0.1.0"
 dependencies = [
  "handl-language",
  "handl-platform",
  "handl-value",
  "hnl-engine",
- "hnl-engine-exec",
+ "hnl-exec",
  "rustc-hash",
  "serde_json",
  "stacker",
 ]
 
 [[package]]
-name = "hnl-engine-fmt"
+name = "hnl-tool-fmt"
 version = "0.1.0"
-source = "git+https://github.com/handl-lang/engine-fmt?branch=main#85836009ca001333fc3395c729feebe96a8e1034"
+source = "git+https://github.com/handl-lang/tool-fmt?branch=main#85836009ca001333fc3395c729feebe96a8e1034"
 dependencies = [
  "handl-language",
  "serde_json",
 ]
 
 [[package]]
-name = "hnl-engine-lex"
+name = "hnl-tool-lex"
 version = "0.1.0"
 dependencies = [
  "handl-language",
@@ -1138,27 +1138,27 @@ dependencies = [
 ]
 
 [[package]]
-name = "hnl-engine-lex-pattern"
+name = "hnl-tool-lex-pattern"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "hnl-engine-lex",
+ "hnl-tool-lex",
 ]
 
 [[package]]
-name = "hnl-engine-lint"
+name = "hnl-tool-lint"
 version = "0.1.0"
 dependencies = [
  "handl-language",
  "handl-plugin-ext-diag",
- "hnl-engine-lex",
- "hnl-engine-parse",
- "hnl-engine-transform",
+ "hnl-tool-lex",
+ "hnl-tool-parse",
+ "hnl-tool-transform",
  "serde_json",
 ]
 
 [[package]]
-name = "hnl-engine-parse"
+name = "hnl-tool-parse"
 version = "0.1.0"
 dependencies = [
  "handl-language",
@@ -1166,16 +1166,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "hnl-engine-parse-pratt"
+name = "hnl-tool-parse-pratt"
 version = "0.1.0"
 dependencies = [
  "handl-language",
- "hnl-engine-parse",
+ "hnl-tool-parse",
  "serde_json",
 ]
 
 [[package]]
-name = "hnl-engine-transform"
+name = "hnl-tool-transform"
 version = "0.1.0"
 dependencies = [
  "handl-language",
@@ -1184,29 +1184,29 @@ dependencies = [
 ]
 
 [[package]]
-name = "hnl-engine-transform-rewrite"
+name = "hnl-tool-transform-rewrite"
 version = "0.1.0"
 dependencies = [
  "handl-language",
  "handl-value",
- "hnl-engine-transform",
+ "hnl-tool-transform",
  "serde_json",
 ]
 
 [[package]]
-name = "hnl-engine-typecheck"
+name = "hnl-tool-typecheck"
 version = "0.1.0"
 dependencies = [
  "handl-language",
  "handl-platform",
  "handl-plugin-ext-diag",
- "hnl-engine-lex",
- "hnl-engine-parse",
+ "hnl-tool-lex",
+ "hnl-tool-parse",
  "serde_json",
 ]
 
 [[package]]
-name = "hnl-engine-typecheck-nbe"
+name = "hnl-tool-typecheck-nbe"
 version = "0.1.0"
 dependencies = [
  "handl-language",
@@ -1214,8 +1214,8 @@ dependencies = [
  "handl-plugin-lib-tag",
  "handl-value",
  "hnl-engine",
- "hnl-engine-exec",
- "hnl-engine-typecheck",
+ "hnl-exec",
+ "hnl-tool-typecheck",
  "rustc-hash",
  "serde_json",
  "stacker",
@@ -2264,7 +2264,7 @@ name = "handl-plugin-codegen-emitter-python"
 version = "0.1.0"
 
 [[patch.unused]]
-name = "hnl-engine-test"
+name = "hnl-tool-test"
 version = "0.1.0"
 
 [[patch.unused]]
