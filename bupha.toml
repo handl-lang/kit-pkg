@@ -7,7 +7,7 @@
 
 [[repos]]
 name = "handl-lang/kit-pkg"
-dir = "/home/luis/GitHub/handl-lang/kit-pkg"
+dir = "~/GitHub/handl-lang/kit-pkg"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
