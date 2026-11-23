@@ -2221,6 +2221,62 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "29666d0abbfad1e3dc4dcf6144730dd3a3ab225bbbdac83319345b1b44ccfc1b"
 
 [[patch.unused]]
+name = "handl-plugin-sdkgen-backend-webidl"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-compile-sexp"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-compile-handl"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "compile-cuda"
+version = "0.0.1"
+
+[[patch.unused]]
+name = "compile-triton"
+version = "0.0.1"
+
+[[patch.unused]]
+name = "handl-plugin-sdkgen-backend-c"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-sdkgen-emitter-file"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "hnl-ext-mlopt"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "hnl-engine-test"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-compile-js"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-sdkgen-cli"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-compile-dot"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-ext"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-compile-term"
+version = "0.1.0"
+
+[[patch.unused]]
 name = "handl-plugin-applier"
 version = "0.1.0"
 
@@ -2294,4 +2350,28 @@ version = "0.1.0"
 
 [[patch.unused]]
 name = "handl-test-utils"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "hnl-ext-mlopt"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-kit-eqsat"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-compile-llvm"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-plugin-sdkgen-emitter-python"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-kit-eqsat"
+version = "0.1.0"
+
+[[patch.unused]]
+name = "handl-egraph"
 version = "0.1.0"

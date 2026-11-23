@@ -10,8 +10,8 @@ keywords = ["handl", "kit", "packages"]
 categories = ["development-tools"]
 
 [dependencies]
-handl-kit-prelude = { git = "https://github.com/handl-lang/kit-prelude", branch = "main" }
-handl-kit-data-prelude = { git = "https://github.com/handl-lang/kit-data-prelude", branch = "main" }
+handl-kit-prelude = { git = "https://github.com/handl-lang/host", branch = "main" }
+handl-kit-data-prelude = { git = "https://github.com/handl-lang/host", branch = "main" }
 handl-language = { git = "https://github.com/handl-lang/kernel", branch = "main" }
 handl-platform = { git = "https://github.com/handl-lang/host", branch = "main" }
 
