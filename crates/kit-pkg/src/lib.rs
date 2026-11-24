@@ -26,6 +26,16 @@ fn load_project_dependencies(project_root: &Path) -> Result<HashMap<String, Path
         .map_err(|e| LangError::engine(format!("project dependencies: {e}")))
 }
 
+/// The `pkg.hnl` `deps` atom/module scopes (P-013 T-150) declared next to
+/// the project's `.handl.toml` — empty when no `pkg.hnl` exists or none of
+/// its deps are scoped. Same manifest dir [`load_project_dependencies`]
+/// resolves deps from.
+fn project_dep_scopes(project_root: &Path) -> HashMap<String, handl_platform::PkgDepScope> {
+    std::fs::read_to_string(project_root.join("pkg.hnl"))
+        .map(|src| handl_platform::pkg_dep_scope_map(&src))
+        .unwrap_or_default()
+}
+
 /// Project-discovery constructors for [`Kit`].
 pub trait KitProjectExt: Sized {
     /// Build the prelude kit with a `module_root` directory for resolving
@@ -131,11 +141,15 @@ impl KitProjectExt for Kit {
         let lang = kit.lang().clone();
         let config = kit.runtime_config().clone().with_typecheck("nbe");
         let deps = load_project_dependencies(&project_root)?;
-        Self::build_kit(
+        // P-013 T-150: the project's `pkg.hnl` `deps` atom/module scopes
+        // ride into the module loader alongside the dep dirs.
+        let dep_scopes = project_dep_scopes(&project_root);
+        Self::build_kit_with_dep_scopes(
             lang,
             config,
             Some(project_root),
             deps,
+            dep_scopes,
             None,
             prelude_engine_registry(),
         )
@@ -204,6 +218,13 @@ impl DiscoverInner for Kit {
             config = config.with_eval(name);
         }
 
+        // P-013 T-150: the discovered manifest's `pkg.hnl` dep scopes —
+        // same dir `resolve_dependencies` reads `pkg.hnl` from. Read
+        // before `manifest_dir` is consumed by the deps load below.
+        let dep_scopes = manifest_dir
+            .as_ref()
+            .map(|dir| project_dep_scopes(dir))
+            .unwrap_or_default();
         let mut deps = manifest_dir
             .map(|root| load_project_dependencies(&root))
             .unwrap_or_else(|| Ok(HashMap::new()))?;
@@ -217,11 +238,12 @@ impl DiscoverInner for Kit {
                 deps.entry(name).or_insert(dir);
             }
         }
-        Kit::build_kit(
+        Kit::build_kit_with_dep_scopes(
             lang,
             config,
             Some(start_dir),
             deps,
+            dep_scopes,
             None,
             prelude_engine_registry(),
         )
