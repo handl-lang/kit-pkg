@@ -5,8 +5,8 @@
 
 use std::path::PathBuf;
 
-use handl_kit_prelude::Kit;
 use handl_kit_pkg::KitProjectExt;
+use handl_kit_prelude::Kit;
 
 /// The workspace root — `new_with_project` wires its `.handl.toml`
 /// `[dependencies]` into the module loader, so a package's own name imports

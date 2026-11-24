@@ -9,8 +9,8 @@
 use std::fs;
 use std::path::PathBuf;
 
-use handl_kit_prelude::Kit;
 use handl_kit_pkg::KitProjectExt;
+use handl_kit_prelude::Kit;
 use serde_json::json;
 
 /// Write `contents` to `<dir>/<name>` and return the full path.
