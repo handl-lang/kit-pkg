@@ -27,7 +27,7 @@ fn write_module(dir: &std::path::Path, name: &str, contents: &str) -> PathBuf {
 #[test]
 fn import_loads_module_bindings() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "module.hnl", "x :: 42");
+    write_module(dir.path(), "module.hnl", "x := 42");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     // `do { import "module.hnl"; x }` — import binds `x` into the block
@@ -63,7 +63,7 @@ fn import_missing_file_errors() {
 #[test]
 fn import_caches_modules() {
     let dir = tempfile::tempdir().expect("tempdir");
-    let module_path = write_module(dir.path(), "cached.hnl", "x :: 7");
+    let module_path = write_module(dir.path(), "cached.hnl", "x := 7");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     // First import loads + caches the module.
@@ -202,7 +202,7 @@ fn import_resolves_handl_toml_dependencies() {
     .expect("write manifest");
     let dep_dir = root.join("vendor/arrows/transform");
     fs::create_dir_all(&dep_dir).expect("create dep dir");
-    write_module(&dep_dir, "map.hnl", "double :: x ~> x * 2");
+    write_module(&dep_dir, "map.hnl", "double := x ~> x * 2");
     let main = write_module(
         root,
         "main.hnl",
@@ -229,7 +229,7 @@ fn import_resolves_table_form_dependencies() {
     .expect("write manifest");
     let dep_dir = root.join("vendor/util");
     fs::create_dir_all(&dep_dir).expect("create dep dir");
-    write_module(&dep_dir, "answer.hnl", "answer :: 42");
+    write_module(&dep_dir, "answer.hnl", "answer := 42");
     let main = write_module(
         root,
         "main.hnl",
@@ -261,11 +261,11 @@ fn import_nested_relative_resolves_against_module_dir() {
     // Pratt parser yields one top-level node per module), so the nested
     // import happens inside the bound `do` block and `two` is captured
     // into the exported arrow's env.
-    write_module(&root.join("vendor/arrows"), "consts.hnl", "two :: 2");
+    write_module(&root.join("vendor/arrows"), "consts.hnl", "two := 2");
     write_module(
         &dep_dir,
         "map.hnl",
-        "double :: do { import \"../consts.hnl\"; x ~> x * two }",
+        "double := do { import \"../consts.hnl\"; x ~> x * two }",
     );
     let main = write_module(
         root,
@@ -286,7 +286,7 @@ fn import_nested_relative_resolves_against_module_dir() {
 fn import_dependency_fallback_to_module_root() {
     let dir = tempfile::tempdir().expect("tempdir");
     // Plain relative import still works with no `.handl.toml`.
-    write_module(dir.path(), "local.hnl", "x :: 7");
+    write_module(dir.path(), "local.hnl", "x := 7");
     let kit = Kit::discover(dir.path()).expect("kit");
     let val = kit
         .eval("do { import \"local.hnl\"; x }")
@@ -347,8 +347,8 @@ fn discover_with_kit_merges_libs_and_transitive_deps() {
         "{ modules: [\"foo\"], deps: { bar: \"branch:main\" } }\n",
     )
     .expect("write pkg.hnl");
-    write_module(&lib_foo, "answer.hnl", "answer :: 40");
-    write_module(&lib_bar, "two.hnl", "two :: 2");
+    write_module(&lib_foo, "answer.hnl", "answer := 40");
+    write_module(&lib_bar, "two.hnl", "two := 2");
     let main = write_module(
         &proj,
         "main.hnl",
@@ -376,13 +376,13 @@ fn discover_with_kit_project_deps_win_on_collision() {
     }
 
     fs::write(kit_dir.join("kit.hnl"), "{ libs: [\"foo\"] }\n").expect("write kit.hnl");
-    write_module(&lib_foo, "answer.hnl", "answer :: 0");
+    write_module(&lib_foo, "answer.hnl", "answer := 0");
     fs::write(
         proj.join(".handl.toml"),
         "[dependencies]\nfoo = \"vendor/foo\"\n",
     )
     .expect("write manifest");
-    write_module(&vendored, "answer.hnl", "answer :: 42");
+    write_module(&vendored, "answer.hnl", "answer := 42");
     let main = write_module(
         &proj,
         "main.hnl",
@@ -404,7 +404,7 @@ fn discover_with_kit_project_deps_win_on_collision() {
 #[test]
 fn from_import_star_splices_bindings() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "mod.hnl", "x :: 42");
+    write_module(dir.path(), "mod.hnl", "x := 42");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     let val = kit
@@ -418,7 +418,7 @@ fn from_import_star_splices_bindings() {
 #[test]
 fn from_import_star_as_alias_binds_module_object() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "mod.hnl", "x :: 42");
+    write_module(dir.path(), "mod.hnl", "x := 42");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     let val = kit
@@ -432,7 +432,7 @@ fn from_import_star_as_alias_binds_module_object() {
 #[test]
 fn from_import_named_binds_single_export() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "mod.hnl", "double :: (x) ~> x * 2");
+    write_module(dir.path(), "mod.hnl", "double := (x) ~> x * 2");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     let val = kit
@@ -446,7 +446,7 @@ fn from_import_named_binds_single_export() {
 #[test]
 fn from_import_named_as_alias() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "mod.hnl", "double :: (x) ~> x * 2");
+    write_module(dir.path(), "mod.hnl", "double := (x) ~> x * 2");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     let val = kit
@@ -459,7 +459,7 @@ fn from_import_named_as_alias() {
 #[test]
 fn from_import_missing_export_errors() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "mod.hnl", "x :: 42");
+    write_module(dir.path(), "mod.hnl", "x := 42");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     let err = kit
@@ -480,7 +480,7 @@ fn from_import_missing_export_errors() {
 #[test]
 fn from_import_alias_does_not_swallow_next_statement() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "mod.hnl", "x :: 7");
+    write_module(dir.path(), "mod.hnl", "x := 7");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     let val = kit
@@ -499,7 +499,7 @@ fn nested_module_with_host_module_header() {
     write_module(
         dir.path(),
         "inner.hnl",
-        "from \"str\" import * as str\nx :: str.trim(\"  hi  \")",
+        "from \"str\" import * as str\nx := str.trim(\"  hi  \")",
     );
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
@@ -514,7 +514,7 @@ fn nested_module_with_host_module_header() {
 #[test]
 fn nested_module_with_name_first_decl_header() {
     let dir = tempfile::tempdir().expect("tempdir");
-    write_module(dir.path(), "inner.hnl", "import str from \"str\"\nx :: 5");
+    write_module(dir.path(), "inner.hnl", "import str from \"str\"\nx := 5");
     let kit = Kit::new_with_module_root(dir.path().to_path_buf()).expect("kit");
 
     let val = kit
