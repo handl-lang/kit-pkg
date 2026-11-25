@@ -2,6 +2,7 @@
 name = "handl-kit-pkg"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
 description = "Package kit — .handl.toml project discovery and dependency wiring for the prelude Kit."
 license.workspace = true
 repository.workspace = true
