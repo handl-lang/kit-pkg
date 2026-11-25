@@ -14,7 +14,7 @@ crates/kit-pkg/    the handl-kit-pkg crate
 cargo xtask gate        # fmt --check → clippy -D warnings → test → doc
 ```
 
-`cargo xtask` wraps the repo's `xtask/` crate; `ci.sh` is the gate entry. Sibling deps are git
+`cargo xtask` wraps the repo's `xtask/` crate; `workflows/gate.yaml` is the gate entry. Sibling deps are git
 dependencies (`branch = "main"`); the workspace-root `[patch]` tables resolve
 them from sibling checkouts for local development.
 
